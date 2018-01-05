@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tgtiger.Controller.CashierController">
+  <children>
+      <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="TOP_RIGHT" prefHeight="10.0" prefWidth="660.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="101.0" />
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="55.0" text="职工号：" />
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="101.0" />  
+                <Hyperlink alignment="CENTER" onAction="#OUT_M" prefHeight="22.0" prefWidth="81.0" text="退出登录" textFill="#f52008" />
+               </children>
+            </HBox>
+            <SplitPane dividerPositions="0.7545454545454545" prefHeight="436.0" prefWidth="650.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <SplitPane dividerPositions="0.8685446009389671" orientation="VERTICAL" prefHeight="401.0" prefWidth="487.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="311.0" prefWidth="484.0">
+                                 <children>
+                                    <TableView fx:id="billtable" editable="true" prefHeight="335.0" prefWidth="486.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+                                      <columns>
+                                        <TableColumn fx:id="product_name" onEditCommit="#setProduct_name" prefWidth="219.0" text="商品名" />
+                                        <TableColumn fx:id="product_amount" minWidth="0.0" prefWidth="81.0" text="数量" />
+                                          <TableColumn fx:id="product_unitprice" prefWidth="88.0" text="单价" />
+                                          <TableColumn fx:id="product_subtotal" minWidth="0.0" prefWidth="106.0" text="小计" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="158.0">
+                                 <children>
+                                    <Text fx:id="price" layoutX="393.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="354.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="0.0">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextField fx:id="barcode" alignment="CENTER" layoutX="3.0" layoutY="14.0" prefHeight="23.0" prefWidth="150.0" promptText="条形码扫描/输入" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="4.0" />
+                        <Button layoutX="4.0" layoutY="52.0" mnemonicParsing="false" onAction="#Add_Product" prefHeight="23.0" prefWidth="148.0" text="加入商品" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="5.0" />
+                        <Button layoutX="4.0" layoutY="158.0" mnemonicParsing="false" onAction="#Member_Check" prefHeight="23.0" prefWidth="148.0" text="会员检测" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="5.0" />
+                        <TextField fx:id="member_num" alignment="CENTER" layoutX="4.0" layoutY="121.0" prefHeight="23.0" prefWidth="150.0" promptText="会员卡扫描/输入" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="3.0" />
+                        <Button alignment="BOTTOM_CENTER" layoutX="5.0" layoutY="329.0" mnemonicParsing="false" onAction="#Settlement" prefHeight="0.0" prefWidth="148.0" text="结算" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="5.0">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
+                        <Text fx:id="member_infornation" layoutX="4.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="147.240234375" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="5.759765625">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </VBox>  
+  </children>  
+</AnchorPane>
