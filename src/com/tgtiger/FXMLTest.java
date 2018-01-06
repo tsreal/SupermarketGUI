@@ -1,5 +1,8 @@
 package com.tgtiger;
 
+import com.tgtiger.API.Server;
+import com.tgtiger.Bean.TransInfo;
+import com.tgtiger.Bean.Worker;
 import com.tgtiger.Check;
 import com.tgtiger.Controller.*;
 import javafx.application.Application;
@@ -19,14 +22,14 @@ import java.util.logging.Logger;
 public class FXMLTest extends Application {
 	private Stage stage;
 	private int level = 0;
-	private final double MINIMUM_WINDOW_WIDTH = 400.0;
-	private final double MINIMUM_WINDOW_HEIGHT = 250.0;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
 		stage.setTitle("超市管理系统");
+		double MINIMUM_WINDOW_WIDTH = 400.0;
 		stage.setWidth(MINIMUM_WINDOW_WIDTH);
+		double MINIMUM_WINDOW_HEIGHT = 250.0;
 		stage.setHeight(MINIMUM_WINDOW_HEIGHT);
 		gotologin();
 		stage.setResizable(false);
@@ -59,11 +62,25 @@ public class FXMLTest extends Application {
 			Logger.getLogger(FXMLTest.class.getName()).log(Level.SEVERE, null,ex);
 		}
 	}
+
+	public void gotoDialogErr(String info) {
+		try {
+			DialogLoginErrController dialog_err = (DialogLoginErrController) replaceSceneContent("./fxml/dialog_login_err.fxml");
+			dialog_err.setLabel(info);
+			dialog_err.setApp(this);
+		} catch (Exception e) {
+			Logger.getLogger(FXMLTest.class.getName()).log(Level.SEVERE, null, e);
+		}
+
+
+
+	}
 	
-	public void gotocashier() {//收银界面
+	public void gotocashier(TransInfo info) {//收银界面
 		try {
 			CashierController cashier = (CashierController) replaceSceneContent("./fxml/cashier.fxml");
 			cashier.setApp(this);
+
 			/*if (0 == level) {
 				cashier.setState(true);
 			}
@@ -75,7 +92,7 @@ public class FXMLTest extends Application {
 		}
 	}
 	
-	public void gotosystem() {//系统界面
+	public void gotosystem(TransInfo info) {//系统界面
 		try {
 			SystemController system = (SystemController) replaceSceneContent("./fxml/system.fxml");
 			system.setApp(this);
@@ -90,16 +107,49 @@ public class FXMLTest extends Application {
 		}
 	}
 	
-	public void userlogin(String account, String password) {//登录判断账号类型
-		if (Check.checkreturn(account, password)) {
-			if("1".equals(account)){
-				level = 1;
-				gotocashier();
-			}else{
-				level = 0;
-				gotosystem();
+	public void userlogin(String account, String password) {
+		//登录判断账号类型
+
+//		if (Check.checkreturn(account, password)) {
+//			if("1".equals(account)){
+//				level = 1;
+//				gotocashier();
+//			}else{
+//				level = 0;
+//				gotosystem();
+//			}
+//
+//		}
+		if (account.equals("")|| password.equals("") ) {
+			gotoDialogErr("输入栏不能为空");
+		} else {
+			Worker worker = new Server().workerLogin(account, password);
+			if (worker.getYes() == 0) {
+				TransInfo info = new TransInfo();
+				info.setNumber(worker.getWorkerNo());
+
+				if (worker.getLevel() == 0 || worker.getLevel() == 1) {
+					gotosystem(info);
+				} else {
+
+					gotocashier(info);
+				}
+			} else if (worker.getYes() == 3) {
+				gotoDialogErr("错误3:获取json为null");
+			} else if (worker.getYes() == 2) {
+				gotoDialogErr("错误2：账号不存在,请先注册");
+			} else if (worker.getYes() == 1) {
+				gotoDialogErr("错误1：密码错误，请重试");
+			} else {
+				gotoDialogErr("未知错误");
 			}
 		}
+
+
+
+
+
+
 	}
 
 	public void useroutmain() {//返回登录界面

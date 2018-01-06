@@ -52,7 +52,7 @@ public class RegisterController implements Initializable {
 		if (password.getText().length() > 0 && password1.getText().length() > 0) {
 			if (!password.getText().equals(password1.getText())) {
 				warning.setText("两次密码不一致！");
-				return;
+//				return;
 			} else {
 				warning.setText(null);
 				application.gotodialog();
