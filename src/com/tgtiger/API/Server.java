@@ -2,6 +2,7 @@ package com.tgtiger.API;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.tgtiger.Bean.Bill;
 import com.tgtiger.Bean.Worker;
 import com.tgtiger.Datas;
 import com.tgtiger.utils.HttpUtils;
@@ -54,6 +55,44 @@ public class Server {
         }
 
     }
+
+
+    public String addWorker(String phone, String password, int level, String name) {
+        JSONObject json_send = new JSONObject();
+        json_send.put("phone", phone);
+        json_send.put("password", password);
+        json_send.put("level", level);
+        json_send.put("name",name);
+        return HttpUtils.post(Datas.serverIp + "addworker", json_send.toString());
+    }
+
+    public String checkVip(String memberNo) {
+        JSONObject json_send = new JSONObject();
+        json_send.put("memberNo", memberNo);
+        return HttpUtils.post(Datas.serverIp + "vipcheck", json_send.toString());
+    }
+
+    public String getBill(Bill bill, Boolean b) {
+        JSONObject json_send = new JSONObject();
+        json_send.put("bill", bill);
+        json_send.put("isVip", b);
+        return HttpUtils.post(Datas.serverIp + "getbill", json_send.toString());
+    }
+
+
+    public String getProduct(String barcode) {
+        JSONObject json_sned = new JSONObject();
+        json_sned.put("barCode", barcode);
+        return HttpUtils.post(Datas.serverIp + "getproduct", json_sned.toString());
+    }
+
+
+    public String addProduct(JSONObject json_send) {
+        return HttpUtils.post(Datas.serverIp + "addproduct", json_send.toString());
+    }
+
+
+
 
 
 

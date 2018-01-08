@@ -22,37 +22,37 @@
         <HBox alignment="CENTER" prefHeight="58.0" prefWidth="282.0">
                <children>
             <Label alignment="TOP_CENTER" prefHeight="64.0" prefWidth="219.0" text="Welcome" textFill="#3437f5">
-              <effect>  
-                <DropShadow color="#afb8d7" height="9.36" radius="4.5600000000000005" width="10.88" />  
-              </effect>  
-              <font>  
-                <Font name="Bodoni MT Condensed Bold" size="37.0" />  
-              </font>  
-            </Label>
-               </children>  
-        </HBox>  
-        <GridPane alignment="CENTER" prefHeight="126.0" prefWidth="405.0">
-          <children>  
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="90.0" text="用户名：" textFill="#2301fc" GridPane.halignment="RIGHT">  
-              <effect>  
-                <DropShadow blurType="TWO_PASS_BOX" height="7.845238095238096" radius="3.675595238095238" width="8.857142857142858" />  
-              </effect>  
-              <font>  
-                <Font size="18.0" />  
-              </font>  
-              <GridPane.margin>  
-                <Insets right="8.0" />  
-              </GridPane.margin>  
-            </Label>  
-            <TextField fx:id="account" onKeyPressed="#isEnter" prefHeight="23.0" prefWidth="119.0" promptText="please input your account" GridPane.columnIndex="1" />  
-            <PasswordField fx:id="password" onKeyPressed="#isEnter" promptText="please input your password" GridPane.columnIndex="1" GridPane.rowIndex="1" />  
-            <Button id="btn_login" alignment="CENTER" mnemonicParsing="false" onAction="#REGISTER_M" prefHeight="44.0" prefWidth="107.0" text="注册" GridPane.halignment="RIGHT" GridPane.rowIndex="2">  
               <effect>
-                        <DropShadow />  
-              </effect>  
-              <GridPane.margin>  
-                <Insets top="15.0" />  
-              </GridPane.margin>  
+                <DropShadow color="#afb8d7" height="9.36" radius="4.5600000000000005" width="10.88" />
+              </effect>
+              <font>
+                <Font name="Bodoni MT Condensed Bold" size="37.0" />
+              </font>
+            </Label>
+               </children>
+        </HBox>
+        <GridPane alignment="CENTER" prefHeight="126.0" prefWidth="405.0">
+          <children>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="90.0" text="用户名：" textFill="#2301fc" GridPane.halignment="RIGHT">
+              <effect>
+                <DropShadow blurType="TWO_PASS_BOX" height="7.845238095238096" radius="3.675595238095238" width="8.857142857142858" />
+              </effect>
+              <font>
+                <Font size="18.0" />
+              </font>
+              <GridPane.margin>
+                <Insets right="8.0" />
+              </GridPane.margin>
+            </Label>
+            <TextField fx:id="account" onKeyPressed="#isEnter" prefHeight="23.0" prefWidth="119.0" promptText="please input your account" GridPane.columnIndex="1" />
+            <PasswordField fx:id="password" onKeyPressed="#isEnter" promptText="please input your password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button id="btn_login" alignment="CENTER" mnemonicParsing="false" onAction="#REGISTER_M" prefHeight="44.0" prefWidth="107.0" text="注册" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+              <effect>
+                        <DropShadow />
+              </effect>
+              <GridPane.margin>
+                <Insets top="15.0" />
+              </GridPane.margin>
             </Button>
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="91.0" text="密码：" textFill="#2301fc" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <effect>
@@ -70,26 +70,26 @@
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
-                  </Button>  
-          </children>  
-          <columnConstraints>  
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="168.0" />  
+                  </Button>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="168.0" />
             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0" prefWidth="169.0" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0" prefWidth="65.0" />  
-          </columnConstraints>  
-          <rowConstraints>  
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />  
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />  
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />  
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0" prefWidth="65.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
                <padding>
                   <Insets bottom="10.0" top="-30.0" />
-               </padding>  
-        </GridPane>  
-      </children>  
-      <padding>  
-        <Insets top="30.0" />  
-      </padding>  
-    </VBox>  
-  </children>  
+               </padding>
+        </GridPane>
+      </children>
+      <padding>
+        <Insets top="30.0" />
+      </padding>
+    </VBox>
+  </children>
 </AnchorPane>

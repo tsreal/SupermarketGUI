@@ -3,7 +3,6 @@ package com.tgtiger;
 import com.tgtiger.API.Server;
 import com.tgtiger.Bean.TransInfo;
 import com.tgtiger.Bean.Worker;
-import com.tgtiger.Check;
 import com.tgtiger.Controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -53,34 +52,12 @@ public class FXMLTest extends Application {
 			Logger.getLogger(FXMLTest.class.getName()).log(Level.SEVERE, null,ex);
 		}
 	}
-	
-	public void gotodialog() {//注册成功界面
-		try{
-			Dialog_TrueController dialog_true = (Dialog_TrueController) replaceSceneContent("./fxml/dialog_true.fxml");
-			dialog_true.setApp(this);
-		}catch(Exception ex){
-			Logger.getLogger(FXMLTest.class.getName()).log(Level.SEVERE, null,ex);
-		}
-	}
 
-	public void gotoDialogErr(String info) {
-		try {
-			DialogLoginErrController dialog_err = (DialogLoginErrController) replaceSceneContent("./fxml/dialog_login_err.fxml");
-			dialog_err.setLabel(info);
-			dialog_err.setApp(this);
-		} catch (Exception e) {
-			Logger.getLogger(FXMLTest.class.getName()).log(Level.SEVERE, null, e);
-		}
-
-
-
-	}
-	
 	public void gotocashier(TransInfo info) {//收银界面
 		try {
 			CashierController cashier = (CashierController) replaceSceneContent("./fxml/cashier.fxml");
 			cashier.setApp(this);
-
+			cashier.setNumber(info.getNumber());
 			/*if (0 == level) {
 				cashier.setState(true);
 			}
@@ -96,6 +73,7 @@ public class FXMLTest extends Application {
 		try {
 			SystemController system = (SystemController) replaceSceneContent("./fxml/system.fxml");
 			system.setApp(this);
+			system.setNumber(info.getNumber());
 			/*if (0 == level) {
 				system.setState(true);
 			}
@@ -109,19 +87,8 @@ public class FXMLTest extends Application {
 	
 	public void userlogin(String account, String password) {
 		//登录判断账号类型
-
-//		if (Check.checkreturn(account, password)) {
-//			if("1".equals(account)){
-//				level = 1;
-//				gotocashier();
-//			}else{
-//				level = 0;
-//				gotosystem();
-//			}
-//
-//		}
-		if (account.equals("")|| password.equals("") ) {
-			gotoDialogErr("输入栏不能为空");
+		if (account.length()==0|| password.length()==0 ) {
+			new Alert().error("输入栏不能为空");
 		} else {
 			Worker worker = new Server().workerLogin(account, password);
 			if (worker.getYes() == 0) {
@@ -131,26 +98,22 @@ public class FXMLTest extends Application {
 				if (worker.getLevel() == 0 || worker.getLevel() == 1) {
 					gotosystem(info);
 				} else {
-
 					gotocashier(info);
 				}
 			} else if (worker.getYes() == 3) {
-				gotoDialogErr("错误3:获取json为null");
+				new Alert().error("错误3:获取json为null");
 			} else if (worker.getYes() == 2) {
-				gotoDialogErr("错误2：账号不存在,请先注册");
+				new Alert().error("错误2：账号不存在,请先注册");
 			} else if (worker.getYes() == 1) {
-				gotoDialogErr("错误1：密码错误，请重试");
+				new Alert().error("错误1：密码错误，请重试");
 			} else {
-				gotoDialogErr("未知错误");
+			    new Alert().error("未知错误");
 			}
 		}
-
-
-
-
-
-
 	}
+
+
+
 
 	public void useroutmain() {//返回登录界面
 		gotologin();
