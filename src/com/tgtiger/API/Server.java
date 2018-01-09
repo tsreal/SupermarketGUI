@@ -69,7 +69,7 @@ public class Server {
     public String checkVip(String memberNo) {
         JSONObject json_send = new JSONObject();
         json_send.put("memberNo", memberNo);
-        return HttpUtils.post(Datas.serverIp + "vipcheck", json_send.toString());
+        return HttpUtils.post(Datas.serverIp + "checkvip", json_send.toString());
     }
 
     public String getBill(Bill bill, Boolean b) {
@@ -81,14 +81,14 @@ public class Server {
 
 
     public String getProduct(String barcode) {
-        JSONObject json_sned = new JSONObject();
-        json_sned.put("barCode", barcode);
-        return HttpUtils.post(Datas.serverIp + "getproduct", json_sned.toString());
+        JSONObject json_send = new JSONObject();
+        json_send.put("barCode", barcode);
+        return HttpUtils.post(Datas.serverIp + "getproduct", json_send.toString());
     }
 
 
-    public String addProduct(JSONObject json_send) {
-        return HttpUtils.post(Datas.serverIp + "addproduct", json_send.toString());
+    public String addProduct(String a) {
+        return HttpUtils.post(Datas.serverIp + "addproduct", a);
     }
 
 

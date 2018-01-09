@@ -10,15 +10,17 @@ public class HttpUtils {
     public static String post(String urlPath, String json){
         try {
             URL url = new URL(urlPath);
+
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Charset", "UTF-8");
+            conn.addRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
             conn.setDoOutput(true);
             conn.setDoInput(true);
 
             OutputStream os = conn.getOutputStream();
-            os.write(json.getBytes("utf-8"));
+            os.write(json.getBytes("UTF-8"));
             os.flush();
             os.close();
 

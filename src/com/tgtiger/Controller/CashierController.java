@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -95,16 +96,22 @@ public class CashierController implements Initializable {
 
 	}
 
-	@FXML
-	private void setProduct_name(ActionEvent event) {
-
-	}
-
 
     @FXML
     private void changeProductAmount(ActionEvent event) {
-
+//			billtable.getItems().get(RowRightSelection).setSubtotal(billtable.getItems().get(RowRightSelection).getAmount()*
+//			billtable.getItems().get(RowRightSelection).getUnitprice());
+//			billtable.refresh();
     }
+
+
+	//使warning显示的内容可以消失
+	@FXML
+	private void isType(KeyEvent event) {
+		if (member_num.getText().length() != 0 || member_num.getText()!=null) {
+			member_information.setText(null);
+		}
+	}
 
     //会员检测
 	@FXML
@@ -164,6 +171,9 @@ public class CashierController implements Initializable {
 						RowRightSelection = observable.getValue().intValue();
 
 					}
+
+
+
 				}
 		);
 		product_name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -229,20 +239,26 @@ public class CashierController implements Initializable {
 		price.setText("总价:" + getTotalPrice(this.billList));
 		//System.out.println(billtable.getColumns().get(1).getCellObservableValue(0).getValue());
 		//第2列第1行 get(列数).getCellObservableValue(行数)
+
 	}
 
     //添加产品
     @FXML
     private void Add_Product(ActionEvent event) {
-        billtable.setVisible(true);
-        String result = new Server().getProduct(member_num.getText());
-        if (result == null || result.length() == 0) {
-            new Alert().error("和服务器通讯失败");
-        } else {
-            JSONObject json_rec = JSON.parseObject(result);
-            Product product = json_rec.getObject("product", Product.class);
-            add_tableList(product.getName(),Double.valueOf(product.getPriceSale()));
-        }
+		if (barcode.getText().length() == 0) {
+			new Alert().error("请先扫描或者输入条形码");
+		} else {
+			String result = new Server().getProduct(barcode.getText());
+			if (result == null || result.length() == 0) {
+				new Alert().error("和服务器通讯失败");
+			} else {
+				System.out.println(result);
+				JSONObject json_rec = JSON.parseObject(result);
+				Product product = json_rec.getObject("product", Product.class);
+				add_tableList(product.getName(), Double.valueOf(product.getPriceSale()));
+			}
+		}
+
     }
 
 

@@ -32,14 +32,14 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <SplitPane dividerPositions="0.7885802469135802" prefHeight="402.0" prefWidth="650.0">
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="436.0">
-                            <TableView prefHeight="400.0" prefWidth="510.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+                            <TableView fx:id="memberTable" prefHeight="400.0" prefWidth="510.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                    <TableColumn prefWidth="75.0" text="会员号" />
-                                    <TableColumn prefWidth="75.0" text="姓名" />
-                                    <TableColumn prefWidth="75.0" text="手机号" />
-                                    <TableColumn prefWidth="75.0" text="注册日期" />
-                                    <TableColumn prefWidth="75.0" text="是否过期" />
-                                    <TableColumn prefWidth="75.0" text="消费额" />
+                                    <TableColumn fx:id="member_number" prefWidth="102.0" resizable="false" text="会员号" />
+                                    <TableColumn fx:id="member_name" prefWidth="78.0" resizable="false" text="姓名" />
+                                    <TableColumn fx:id="member_phone" prefWidth="103.0" resizable="false" text="手机号" />
+                                    <TableColumn fx:id="member_date_signup" prefWidth="83.0" resizable="false" text="注册日期" />
+                                    <TableColumn fx:id="member_expire" prefWidth="51.0" resizable="false" text="过期" />
+                                    <TableColumn fx:id="member_cost" prefWidth="91.0" resizable="false" text="消费额" />
                                 </columns>
                             </TableView>
                         </AnchorPane>
@@ -80,11 +80,11 @@
                             <GridPane alignment="CENTER" prefHeight="338.0" prefWidth="650.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                                 <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="91.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="92.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="133.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="105.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="138.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="10.0" prefWidth="84.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="145.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="10.0" prefWidth="70.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -93,62 +93,62 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
-                                <TextField GridPane.columnIndex="2" />
-                                <TextField GridPane.columnIndex="4" />
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                <TextField GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                <TextField GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                <Text fx:id="id_name" strokeType="OUTSIDE" strokeWidth="0.0" text="商品名称" textAlignment="CENTER" wrappingWidth="107.240234375" GridPane.columnIndex="1">
+                                <TextField fx:id="id_name" GridPane.columnIndex="2" />
+                                <TextField fx:id="id_timeexpire" GridPane.columnIndex="4" />
+                                <TextField fx:id="id_state" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                <TextField fx:id="id_timeproduce" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                <TextField fx:id="id_importsale" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                <TextField fx:id="id_type" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                <TextField fx:id="id_sale" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                <TextField fx:id="id_provider" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                <TextField fx:id="id_discount" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                <TextField fx:id="id_producer" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="商品名称:" textAlignment="CENTER" wrappingWidth="107.240234375" GridPane.columnIndex="1">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_state" strokeType="OUTSIDE" strokeWidth="0.0" text="商品状态" textAlignment="CENTER" wrappingWidth="107.240234375" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="商品状态:" textAlignment="CENTER" wrappingWidth="107.240234375" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_importsale" strokeType="OUTSIDE" strokeWidth="0.0" text="商品进价" textAlignment="CENTER" wrappingWidth="109.240234375" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="商品进价:" textAlignment="CENTER" wrappingWidth="109.240234375" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_sale" strokeType="OUTSIDE" strokeWidth="0.0" text="销售价格" textAlignment="CENTER" wrappingWidth="108.240234375" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="销售价格:" textAlignment="CENTER" wrappingWidth="108.240234375" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_discount" strokeType="OUTSIDE" strokeWidth="0.0" text="折扣" textAlignment="CENTER" wrappingWidth="108.240234375" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="折扣:" textAlignment="RIGHT" wrappingWidth="92.240234375" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_timeexpire" strokeType="OUTSIDE" strokeWidth="0.0" text="过期时间" textAlignment="CENTER" wrappingWidth="81.240234375" GridPane.columnIndex="3">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="过期时间:" textAlignment="CENTER" wrappingWidth="101.240234375" GridPane.columnIndex="3">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_timeproduce" strokeType="OUTSIDE" strokeWidth="0.0" text="生产日期" textAlignment="CENTER" wrappingWidth="78.240234375" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="生产日期:" textAlignment="CENTER" wrappingWidth="101.240234375" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_type" strokeType="OUTSIDE" strokeWidth="0.0" text="产品种类" textAlignment="CENTER" wrappingWidth="76.240234375" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="产品种类:" textAlignment="CENTER" wrappingWidth="101.240234375" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_provider" strokeType="OUTSIDE" strokeWidth="0.0" text="供货商" textAlignment="CENTER" wrappingWidth="81.240234375" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="供货商:" textAlignment="CENTER" wrappingWidth="116.240234375" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Text>
-                                <Text fx:id="id_producer" strokeType="OUTSIDE" strokeWidth="0.0" text="生产商" textAlignment="CENTER" wrappingWidth="81.240234375" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="生产商:" textAlignment="CENTER" wrappingWidth="113.240234375" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
@@ -156,12 +156,12 @@
                             </GridPane>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                            <Button alignment="CENTER" layoutX="460.0" layoutY="7.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="101.0" text="增加" onAction="#ADD_PRODUCT" textAlignment="CENTER" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="87.0">
+                            <Button alignment="CENTER" layoutX="460.0" layoutY="7.0" mnemonicParsing="false" onAction="#ADD_PRODUCT" prefHeight="41.0" prefWidth="101.0" text="增加" textAlignment="CENTER" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="87.0">
                                 <font>
                                     <Font size="20.0" />
                                 </font>
                             </Button>
-                            <Button alignment="CENTER" layoutX="126.0" layoutY="7.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="101.0" text="清除" onAction="#CLEAR_ALL" textAlignment="CENTER" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="126.0">
+                            <Button alignment="CENTER" layoutX="126.0" layoutY="7.0" mnemonicParsing="false" onAction="#CLEAR_ALL" prefHeight="41.0" prefWidth="101.0" text="清除" textAlignment="CENTER" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="126.0">
                                 <font>
                                     <Font size="20.0" />
                                 </font>
