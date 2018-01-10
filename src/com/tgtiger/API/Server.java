@@ -7,6 +7,8 @@ import com.tgtiger.Bean.Worker;
 import com.tgtiger.Datas;
 import com.tgtiger.utils.HttpUtils;
 
+import java.util.List;
+
 public class Server {
     //用户密码返回
     /*
@@ -72,13 +74,13 @@ public class Server {
         return HttpUtils.post(Datas.serverIp + "checkvip", json_send.toString());
     }
 
-    public String getBill(Bill bill, Boolean b) {
+    public String getBill(List<Bill.BillsEntity> bill, Boolean b,String memberNo) {
         JSONObject json_send = new JSONObject();
-        json_send.put("bill", bill);
-        json_send.put("isVip", b);
+        json_send.put("bills", bill);
+        json_send.put("vip", b);
+        json_send.put("memberNo", memberNo);
         return HttpUtils.post(Datas.serverIp + "getbill", json_send.toString());
     }
-
 
     public String getProduct(String barcode) {
         JSONObject json_send = new JSONObject();
@@ -92,9 +94,36 @@ public class Server {
     }
 
 
+    public String getMember(String phone) {
+        JSONObject json_send = new JSONObject();
+        json_send.put("phone", phone);
+        return HttpUtils.post(Datas.serverIp + "getmember", json_send.toString());
+    }
 
+    public String getAllMember() {
+        JSONObject json_send = new JSONObject();
+        json_send.put("request", true);
+        return HttpUtils.post(Datas.serverIp + "getmemberlist", json_send.toString());
+    }
 
+    public String addMember(String phone, String name) {
+        JSONObject json_send = new JSONObject();
+        json_send.put("phone", phone);
+        json_send.put("name", name);
+        return HttpUtils.post(Datas.serverIp + "addmember", json_send.toString());
+    }
 
+    public String getAllWorker() {
+        JSONObject json_send = new JSONObject();
+        json_send.put("request", true);
+        return HttpUtils.post(Datas.serverIp + "getworkerlist", json_send.toString());
+    }
+
+    public String getWorker(String phone) {
+        JSONObject json_send = new JSONObject();
+        json_send.put("phone", phone);
+        return HttpUtils.post(Datas.serverIp + "getworker", json_send.toString());
+    }
 
 
 }

@@ -15,81 +15,90 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tgtiger.Controller.LoginController">
-  <children>
-    <VBox alignment="CENTER" layoutX="3.0" layoutY="0.0" prefHeight="250.0" prefWidth="400.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <children>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tgtiger.Controller.LoginController">
+    <VBox alignment="CENTER" layoutX="3.0" layoutY="0.0" prefHeight="250.0" prefWidth="400.0" spacing="20.0"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+        <padding>
+            <Insets top="30.0"/>
+        </padding>
         <HBox alignment="CENTER" prefHeight="58.0" prefWidth="282.0">
-               <children>
             <Label alignment="TOP_CENTER" prefHeight="64.0" prefWidth="219.0" text="Welcome" textFill="#3437f5">
-              <effect>
-                <DropShadow color="#afb8d7" height="9.36" radius="4.5600000000000005" width="10.88" />
-              </effect>
-              <font>
-                <Font name="Bodoni MT Condensed Bold" size="37.0" />
-              </font>
+                <effect>
+                    <DropShadow color="#afb8d7" height="9.36" radius="4.5600000000000005" width="10.88"/>
+                </effect>
+                <font>
+                    <Font name="Bodoni MT Condensed Bold" size="37.0"/>
+                </font>
             </Label>
-               </children>
         </HBox>
         <GridPane alignment="CENTER" prefHeight="126.0" prefWidth="405.0">
-          <children>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="90.0" text="用户名：" textFill="#2301fc" GridPane.halignment="RIGHT">
-              <effect>
-                <DropShadow blurType="TWO_PASS_BOX" height="7.845238095238096" radius="3.675595238095238" width="8.857142857142858" />
-              </effect>
-              <font>
-                <Font size="18.0" />
-              </font>
-              <GridPane.margin>
-                <Insets right="8.0" />
-              </GridPane.margin>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="168.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0"
+                                   prefWidth="169.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0"
+                                   prefWidth="65.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <padding>
+                <Insets bottom="10.0" top="-30.0"/>
+            </padding>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="90.0" text="用户名：" textFill="#2301fc"
+                   GridPane.halignment="RIGHT">
+                <effect>
+                    <DropShadow blurType="TWO_PASS_BOX" height="7.845238095238096" radius="3.675595238095238"
+                                width="8.857142857142858"/>
+                </effect>
+                <font>
+                    <Font size="18.0"/>
+                </font>
+                <GridPane.margin>
+                    <Insets right="8.0"/>
+                </GridPane.margin>
             </Label>
-            <TextField fx:id="account" onKeyPressed="#isEnter" prefHeight="23.0" prefWidth="119.0" promptText="please input your account" GridPane.columnIndex="1" />
-            <PasswordField fx:id="password" onKeyPressed="#isEnter" promptText="please input your password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button id="btn_login" alignment="CENTER" mnemonicParsing="false" onAction="#REGISTER_M" prefHeight="44.0" prefWidth="107.0" text="注册" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-              <effect>
-                        <DropShadow />
-              </effect>
-              <GridPane.margin>
-                <Insets top="15.0" />
-              </GridPane.margin>
+            <TextField fx:id="account" onKeyPressed="#isEnter" prefHeight="23.0" prefWidth="119.0"
+                       promptText="please input your account" GridPane.columnIndex="1"/>
+            <PasswordField fx:id="password" onKeyPressed="#isEnter" promptText="please input your password"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Button id="btn_login" alignment="CENTER" mnemonicParsing="false" onAction="#REGISTER_M"
+                    prefHeight="44.0" prefWidth="107.0" text="注册" GridPane.halignment="RIGHT"
+                    GridPane.rowIndex="2">
+                <effect>
+                    <DropShadow/>
+                </effect>
+                <GridPane.margin>
+                    <Insets top="15.0"/>
+                </GridPane.margin>
             </Button>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="91.0" text="密码：" textFill="#2301fc" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                     <effect>
-                        <DropShadow blurType="TWO_PASS_BOX" height="7.845238095238096" radius="3.675595238095238" width="8.857142857142858" />
-                     </effect>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Hyperlink alignment="TOP_LEFT" contentDisplay="CENTER" onAction="#CLEAR_M" prefHeight="21.0" prefWidth="49.0" text="清除" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button id="btn_login" alignment="CENTER" mnemonicParsing="false" onAction="#LOGIN_M" prefHeight="33.0" prefWidth="107.0" text="登录" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                     <GridPane.margin>
-                        <Insets top="15.0" />
-                     </GridPane.margin>
-                  </Button>
-          </children>
-          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="168.0" />
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0" prefWidth="169.0" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="318.0" minWidth="10.0" prefWidth="65.0" />
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-               <padding>
-                  <Insets bottom="10.0" top="-30.0" />
-               </padding>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="91.0" text="密码：" textFill="#2301fc"
+                   GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                <effect>
+                    <DropShadow blurType="TWO_PASS_BOX" height="7.845238095238096" radius="3.675595238095238"
+                                width="8.857142857142858"/>
+                </effect>
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <Hyperlink alignment="TOP_LEFT" contentDisplay="CENTER" onAction="#CLEAR_M" prefHeight="21.0"
+                       prefWidth="49.0" text="清除" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+            <Button id="btn_login" alignment="CENTER" mnemonicParsing="false" onAction="#LOGIN_M"
+                    prefHeight="33.0" prefWidth="107.0" text="登录" GridPane.columnIndex="1"
+                    GridPane.rowIndex="2">
+                <effect>
+                    <DropShadow/>
+                </effect>
+                <GridPane.margin>
+                    <Insets top="15.0"/>
+                </GridPane.margin>
+            </Button>
         </GridPane>
-      </children>
-      <padding>
-        <Insets top="30.0" />
-      </padding>
     </VBox>
-  </children>
 </AnchorPane>

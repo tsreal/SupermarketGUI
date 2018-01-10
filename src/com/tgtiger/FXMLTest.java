@@ -58,6 +58,7 @@ public class FXMLTest extends Application {
 			CashierController cashier = (CashierController) replaceSceneContent("./fxml/cashier.fxml");
 			cashier.setApp(this);
 			cashier.setNumber(info.getNumber());
+			cashier.initPrice();
 			/*if (0 == level) {
 				cashier.setState(true);
 			}
@@ -145,6 +146,9 @@ public class FXMLTest extends Application {
 		setSize(stage);
 		return (Initializable) loader.getController();
 	}
+
+
+
 
 	public static void main(String[] args) {
 		launch(args);

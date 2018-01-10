@@ -10,6 +10,11 @@ public class Member {
      * expire : false
      */
     private boolean expire;
+    /**
+     * bill : 342
+     */
+    private String bill;
+
 
     public String getName() {
         return name;
@@ -49,5 +54,13 @@ public class Member {
 
     public boolean isExpire() {
         return expire;
+    }
+
+    public void setBill(String bill) {
+        this.bill = bill;
+    }
+
+    public String getBill() {
+        return bill;
     }
 }

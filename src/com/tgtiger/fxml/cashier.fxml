@@ -18,7 +18,7 @@
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tgtiger.Controller.CashierController">
     <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <HBox alignment="TOP_RIGHT" prefHeight="10.0" prefWidth="660.0">
-            <Label alignment="CENTER" prefHeight="22.0" prefWidth="101.0" />
+            <Label fx:id="display_time" alignment="CENTER" prefHeight="22.0" prefWidth="101.0" />
             <Label alignment="CENTER" prefHeight="22.0" prefWidth="55.0" text="职工号：" />
             <Label fx:id="workerNo" alignment="CENTER" prefHeight="22.0" prefWidth="101.0" />
             <Hyperlink alignment="CENTER" onAction="#OUT_M" prefHeight="22.0" prefWidth="81.0" text="退出登录" textFill="#f52008" />
@@ -30,7 +30,7 @@
                         <TableView fx:id="billtable" editable="true" prefHeight="335.0" prefWidth="486.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                             <columns>
                                 <TableColumn fx:id="product_name" prefWidth="228.0" resizable="false" text="商品名" />
-                                <TableColumn fx:id="product_amount" minWidth="0.0" onEditCommit="#changeProductAmount" prefWidth="81.0" resizable="false" text="数量" />
+                                <TableColumn fx:id="product_amount" minWidth="0.0" prefWidth="81.0" resizable="false" text="数量" />
                                 <TableColumn fx:id="product_unitprice" prefWidth="78.0" resizable="false" text="单价" />
                                 <TableColumn fx:id="product_subtotal" minWidth="0.0" prefWidth="94.0" resizable="false" text="小计" />
                             </columns>
