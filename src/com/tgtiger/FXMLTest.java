@@ -4,6 +4,7 @@ import com.tgtiger.API.Server;
 import com.tgtiger.Bean.TransInfo;
 import com.tgtiger.Bean.Worker;
 import com.tgtiger.Controller.*;
+import com.tgtiger.utils.Alert;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

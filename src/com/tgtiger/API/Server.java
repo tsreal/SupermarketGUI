@@ -7,6 +7,7 @@ import com.tgtiger.Bean.Worker;
 import com.tgtiger.Datas;
 import com.tgtiger.utils.HttpUtils;
 
+import java.util.Date;
 import java.util.List;
 
 public class Server {
@@ -123,6 +124,20 @@ public class Server {
         JSONObject json_send = new JSONObject();
         json_send.put("phone", phone);
         return HttpUtils.post(Datas.serverIp + "getworker", json_send.toString());
+    }
+
+    public String getAnalysis(int status, String date) {
+        JSONObject json_send = new JSONObject();
+        json_send.put("status", status);
+        json_send.put("date", date);
+        return HttpUtils.post(Datas.serverIp + "getanalysis", json_send.toString());
+    }
+
+    public String getRemain() {
+        JSONObject json_send = new JSONObject();
+        json_send.put("request", true);
+        return HttpUtils.post(Datas.serverIp + "getremain", json_send.toString());
+
     }
 
 

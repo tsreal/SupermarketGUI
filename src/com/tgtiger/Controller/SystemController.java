@@ -1,36 +1,30 @@
 package com.tgtiger.Controller;
 
-import java.awt.Desktop.Action;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.swing.text.TabableView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.javafx.robot.impl.FXRobotHelper;
 import com.tgtiger.*;
 import com.tgtiger.API.Server;
-import com.tgtiger.Bean.MemberList;
-import com.tgtiger.Bean.Product;
-import com.tgtiger.Bean.TransInfo;
-import com.tgtiger.Bean.WorkerList;
-import com.tgtiger.Depository;
+import com.tgtiger.Bean.*;
+import com.tgtiger.LocalBean.Depository;
+import com.tgtiger.LocalBean.Member;
+import com.tgtiger.LocalBean.Sales_Report;
+import com.tgtiger.LocalBean.Worker;
+import com.tgtiger.utils.Alert;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -41,7 +35,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -127,7 +120,7 @@ public class SystemController implements Initializable {
 	private TextField month;
 	@FXML
 	private TextField day;
-	private int choice; // 年、月、日选择
+	private static int choice; // 年、月、日选择
 	private ObservableList<Sales_Report> saleslist = FXCollections.observableArrayList();
 	/*
 	 * 
@@ -177,6 +170,8 @@ public class SystemController implements Initializable {
 		this.application = application;
 	}
 
+
+	//转到收银界面
 	@FXML
 	private void CASHIER(ActionEvent event) {
 		TransInfo info = new TransInfo();
@@ -412,13 +407,13 @@ public class SystemController implements Initializable {
 	 * 销售报表
 	 */
 	@FXML
-	public ObservableList<Sales_Report> setSalesData() {
+	public ObservableList<Sales_Report> setSalesData(String name,int totalNo,int normalNo,int vipNo,double price,double income) {
 		// for循环存入报表
-		for (int i = 0; i < 20; i++) {
-			Sales_Report sales = new Sales_Report("1", 2, 1, 2, 1.5, 0);
-			sales.setSubtotal(sales.getAmount() * sales.getUnitprice());
-			this.saleslist.add(sales);
-		}
+
+		Sales_Report sales = new Sales_Report(name, totalNo, normalNo, vipNo, price, income);
+//		sales.setSubtotal(sales.getAmount() * sales.getUnitprice());
+		this.saleslist.add(sales);
+
 		return saleslist;
 	}
 
@@ -432,13 +427,59 @@ public class SystemController implements Initializable {
 		}
 		if (year.getText().length() == 4 && month.getText().length() == 2 && day.getText().length() == 2) {
 			String date = year.getText() + "-" + month.getText() + "-" + day.getText();
+			SimpleDateFormat df = new SimpleDateFormat("yy-MM-dd");
+			Date now = new Date();
+			String nowString = df.format(now);
+			Date d_now = null;
+			Date d_input = null;
+			try {
+				d_now = df.parse(nowString);
+				d_input = df.parse(date);
+				if (d_input.getTime() > d_now.getTime()) {
+					new Alert().error("无法查询未来天数");
+				} else {
+					if (choice == 0 || choice == 1 || choice == 2) {
+						String result = new Server().getAnalysis(choice, date);
+						JSONObject json_rec = JSON.parseObject(result);
+						if (json_rec.getInteger("status") == 0) {
+							saleslist.clear();
+							StatementList statementList = JSON.parseObject(result, StatementList.class);
+							for (int i = 0; i < statementList.getLists().size(); i++) {
+								setSalesData(statementList.getLists().get(i).getName(), statementList.getLists().get(i).getTotalNo(),
+										statementList.getLists().get(i).getNormalNo(), statementList.getLists().get(i).getVipNo(),
+										statementList.getLists().get(i).getPriceSale(), statementList.getLists().get(i).getIncome());
+							}
+							sales_table.setItems(saleslist);
+							if (choice == 0) {
+								df = new SimpleDateFormat("yyyy");
+								choice_date.setText(df.format(d_input)+"年");
+							}
+							if (choice == 1) {
+								df = new SimpleDateFormat("yyyy-MM");
+								choice_date.setText(df.format(d_input)+"月");
+							}
+							if (choice == 2) {
+								df = new SimpleDateFormat("yyyy-MM-dd");
+								choice_date.setText(df.format(d_input)+"日");
+							}
+							new Alert().alert("查找成功！");
+						} else {
+							new Alert().error(json_rec.getString("info"));
+						}
+
+					}
+
+
+
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			/*
 			 * send to server
 			 */
-			sales_table.setItems(setSalesData());
-			choice_date.setText(date);
 		} else {
-			new Alert().error("日期错误！");
+			new Alert().error("日期输入错误！");
 		}
 	}
 
@@ -457,6 +498,7 @@ public class SystemController implements Initializable {
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				choice = newValue.intValue();
 				switch (choice) {
+					//year
 				case 0:
 					month.setDisable(true);
 					month.setText("01");
@@ -464,11 +506,13 @@ public class SystemController implements Initializable {
 					day.setText("01");
 					break;
 				case 1:
+					//month
 					month.setDisable(false);
 					day.setDisable(true);
 					day.setText("01");
 					break;
 				case 2:
+					//day
 					month.setDisable(false);
 					day.setDisable(false);
 					break;
@@ -526,19 +570,35 @@ public class SystemController implements Initializable {
 		});
 	}
 
-	public ObservableList<Depository> setDepData() {
+	public ObservableList<Depository> setDepData(String name,int number,int defaultNo, String date) {
 		// for循环存入所有库存信息
-		for (int i = 0; i < 20; i++) {
-			String time = "2017-02-01";
-			Depository dep = new Depository("1", 2, 1, time);
+
+			Depository dep = new Depository(name,number,defaultNo,date);
 			this.deplist.add(dep);
-		}
+
 		return deplist;
 	}
 
 	@FXML
-	public void Dep_Add(ActionEvent event) {
-		dep_table.setItems(setDepData());
+	public void Dep_ALL(ActionEvent event) {
+		deplist.clear();
+
+		String result = new Server().getRemain();
+		if (result != null && result.length() > 0) {
+			JSONObject json_rec = JSON.parseObject(result);
+			if (json_rec.getBoolean("status")) {
+				DepositoryList depositoryList = new DepositoryList();
+				depositoryList = JSON.parseObject(result, DepositoryList.class);
+				for(int i=0; i<depositoryList.getLists().size(); i++) {
+					setDepData(depositoryList.getLists().get(i).getName(), depositoryList.getLists().get(i).getProductNo(),
+							depositoryList.getLists().get(i).getImportNo(), depositoryList.getLists().get(i).getImportTime());
+				}
+				dep_table.setItems(deplist);
+			}
+		} else {
+			new Alert().error("查询失败！");
+		}
+
 	}
 
 	/*

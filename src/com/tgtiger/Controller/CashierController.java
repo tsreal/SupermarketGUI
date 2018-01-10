@@ -2,12 +2,10 @@ package com.tgtiger.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.org.apache.bcel.internal.generic.ALOAD;
 import com.tgtiger.API.Server;
-import com.tgtiger.Alert;
+import com.tgtiger.utils.Alert;
 import com.tgtiger.Bean.Product;
-import com.tgtiger.Bean.TransInfo;
-import com.tgtiger.Bill;
+import com.tgtiger.LocalBean.Bill;
 import com.tgtiger.FXMLTest;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -67,6 +65,8 @@ public class CashierController implements Initializable {
 	@FXML
 	private TableColumn<Bill, Double> product_subtotal;
 
+
+
 	private int RowRightSelection;
 
 	private List<com.tgtiger.Bean.Bill.BillsEntity> billsEntityList = new ArrayList<>();
@@ -116,9 +116,7 @@ public class CashierController implements Initializable {
 	//使warning显示的内容可以消失
 	@FXML
 	private void isType(KeyEvent event) {
-		if (member_num.getText().length() != 0 || member_num.getText() != null) {
 			member_information.setText(null);
-		}
 	}
 
     //会员检测
@@ -135,10 +133,10 @@ public class CashierController implements Initializable {
 			} else {
 				JSONObject json_rec = JSON.parseObject(result);
 				if (json_rec.getInteger("status") == 0) {
-					member_information.setFill(new Color(1, 0, 0, 1));
+					member_information.setFill(new Color(0, 1, 0, 1));
 					member_information.setText(json_rec.getString("info"));
 				} else {
-					member_information.setFill(new Color(0, 1, 0, 1));
+					member_information.setFill(new Color(1, 0, 0, 1));
 					member_information.setText(json_rec.getString("info"));
 				}
 			}
@@ -155,6 +153,7 @@ public class CashierController implements Initializable {
 		if (json_rec.getBoolean("task")) {
 			b = true;
 		}
+
 		if (billsEntityList.size() == 0) {
 			new Alert().alert("请先添加商品");
 		} else {
@@ -166,15 +165,23 @@ public class CashierController implements Initializable {
 			} else {
 				new Alert().error(json_rec.getString("info"));
 			}
-			settleString = "收银员：" + workerNo.getText() + "\t\t\t" + "日期：" + display_time.getText() + "\n";
-			settleString += "\n============================\n\n";
-			settleString += billtable.getColumns().get(0).getText() + "\t\t      " + billtable.getColumns().get(1).getText() + "\t       " + billtable.getColumns().get(2).getText() + "\t       " + billtable.getColumns().get(3).getText() + "\n";
+			settleString = "收银员：" + workerNo.getText() + "\t\t   " + "日期：" + display_time.getText() + "\n";
+			settleString += "\n========================\n\n";
+			settleString += billtable.getColumns().get(0).getText() + "\t\t"
+					+billtable.getColumns().get(1).getText() + "\t\t"
+					+billtable.getColumns().get(2).getText() + "\t\t"
+					+ billtable.getColumns().get(3).getText() + "\n";
 			for (int i = 0; i < N; i++) {
 
-				settleString += "\n" + billtable.getItems().get(i).getName() + "\t\t" + billtable.getItems().get(i).getAmount() + "\t\t" + billtable.getItems().get(i).getUnitprice() + "\t\t" + billtable.getItems().get(i).getSubtotal() + "\n-----------------------------------------------\n";
+				settleString += "\n" + billtable.getItems().get(i).getName()
+						+ "\n\t\t\t  " + billtable.getItems().get(i).getAmount()
+						+ "\t\t" + billtable.getItems().get(i).getUnitprice()
+						+ "\t\t" + billtable.getItems().get(i).getSubtotal()
+						+ "\n------------------------------------------------------\n";
 			}
-			settleString += "\n============================\n\n";
-			settleString += "\n\t\t\t\t\t\t       " + price.getText();
+			settleString += "\n========================\n\n";
+			settleString += "\n\t\t\t\t\t       " + price.getText();
+			System.out.println(settleString);
 			setSettle();
 
 			//订单完成重置
@@ -295,25 +302,29 @@ public class CashierController implements Initializable {
 			} else {
 				System.out.println(result);
 
-				//将商品条码和条码数量
-				int flag_a = 0;
-				for (int i = 0; i < billsEntityList.size(); i++) {
-					if (billsEntityList.get(i).getBarCode().equals(code)) {
-						billsEntityList.get(i).setNumber(billsEntityList.get(i).getNumber() + 1);
-						flag_a = 1;
-					}
-				}
-				if (flag_a == 0) {
 
-					com.tgtiger.Bean.Bill.BillsEntity radom = new com.tgtiger.Bean.Bill.BillsEntity();
-					radom.setNumber(1);
-					radom.setBarCode(code);
-					billsEntityList.add(radom);
-				}
 
 
 				JSONObject json_rec = JSON.parseObject(result);
 				if (json_rec.getBoolean("task")) {
+
+					//将商品条码和条码数量
+					int flag_a = 0;
+					for (int i = 0; i < billsEntityList.size(); i++) {
+						if (billsEntityList.get(i).getBarCode().equals(code)) {
+							billsEntityList.get(i).setNumber(billsEntityList.get(i).getNumber() + 1);
+							flag_a = 1;
+						}
+					}
+					if (flag_a == 0) {
+
+						com.tgtiger.Bean.Bill.BillsEntity radom = new com.tgtiger.Bean.Bill.BillsEntity();
+						radom.setNumber(1);
+						radom.setBarCode(code);
+						billsEntityList.add(radom);
+					}
+
+
 					Product product = json_rec.getObject("product", Product.class);
 					json_store.put(product.getName(), code);
 					add_tableList(product.getName(), Double.valueOf(product.getPriceSale()));
@@ -336,7 +347,7 @@ public class CashierController implements Initializable {
 		display_time.setText(df.format(now));
 	}
 
-	public String settleString="";
+	public static String settleString;
 
 
 	public void setSettle() {

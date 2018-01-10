@@ -3,7 +3,7 @@ package com.tgtiger.Controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.tgtiger.API.Server;
-import com.tgtiger.Alert;
+import com.tgtiger.utils.Alert;
 import com.tgtiger.FXMLTest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

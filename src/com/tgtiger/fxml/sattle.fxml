@@ -4,7 +4,9 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tgtiger.Controller.SettleController">
-   <Button layoutX="109.0" layoutY="341.0" mnemonicParsing="false" onAction="#CloseSettle" prefHeight="35.0" prefWidth="83.0" text="确定" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="109.0" />
-   <TextArea fx:id="settle" editable="false" layoutX="-219.0" prefHeight="570.0" prefWidth="489.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+<AnchorPane prefHeight="500.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tgtiger.Controller.SettleController">
+   <children>
+      <Button fx:id="button" layoutY="460.0" mnemonicParsing="false" onKeyPressed="#Sattle_out" text="close" />
+      <TextArea fx:id="settle" editable="false" prefHeight="500.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
 </AnchorPane>

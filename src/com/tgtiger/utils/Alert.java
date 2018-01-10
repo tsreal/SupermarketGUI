@@ -1,4 +1,4 @@
-package com.tgtiger;
+package com.tgtiger.utils;
 
 public class Alert {
     public void alert(String content) {

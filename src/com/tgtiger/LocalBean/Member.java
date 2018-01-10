@@ -1,4 +1,4 @@
-package com.tgtiger;
+package com.tgtiger.LocalBean;
 
 import javafx.beans.property.*;
 
